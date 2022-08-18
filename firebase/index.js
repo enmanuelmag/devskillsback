@@ -2,12 +2,12 @@ const { initializeApp, getApps } = require("firebase/app");
 const { getFirestore } = require("firebase/firestore");
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAyO5wSV8oT8qF8GYZJ50n4gXlTcdmvpyE",
-  authDomain: "newcombintest.firebaseapp.com",
-  projectId: "newcombintest",
-  storageBucket: "newcombintest.appspot.com",
-  messagingSenderId: "714223511086",
-  appId: "1:714223511086:web:be688c816a209f665ea1bf"
+  apiKey: process.env.APIKEY,
+  authDomain: process.env.AUTHDOMAIN,
+  projectId: process.env.PROJECTID,
+  storageBucket: process.env.STORAGEBUCKET,
+  messagingSenderId: process.env.MESSAGINGSENDERID,
+  appId: process.env.APPID,
 };
 
 if (getApps().length === 0) {
