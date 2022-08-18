@@ -19,7 +19,7 @@ app.get('/ping', (req, res) => {
   return res.send('pong!');
 });
 
-app.use('/v1/notes', require('./controllers/note'));
+app.use('/v1/tax', require('./controllers/tax'));
 
 //Start server
 const PORT = process.env.PORT || 9010;
