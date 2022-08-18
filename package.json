@@ -4,6 +4,7 @@
   "description": "En este desafío, creará una API REST de una versión súper simplificada de un proveedor de servicios de pago de impuestos.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +23,8 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "firebase": "^9.9.2",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
     "morgan": "^1.10.0",
     "schema-inspector": "^2.0.1"
   }

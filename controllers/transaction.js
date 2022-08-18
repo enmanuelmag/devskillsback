@@ -4,7 +4,7 @@ const inspector = require('schema-inspector');
 const Transaction = require('../models/transaction');
 const TransactionSchema = require('../schemas/transaction');
 
-router.post('/', (req, res) => {
+router.post('/pay', (req, res) => {
   const body = req.body;
 
   // Sanitize input
@@ -21,17 +21,18 @@ router.post('/', (req, res) => {
           message: 'Bad Request: ' + result.format(),
         });
       } else if (error) {
+        console.log(error);
         return res.status(500).json({
           code: 'UE',
           message: 'Server Error: ' + error.message,
         });
       }
-
+      console.log(payload.data);
       return Transaction.pay({ data: payload.data }, (err, transaction) => {
         if (err) {
           return res.status(500).json({
             code: 'UE',
-            message: err,
+            message: err.message,
           });
         }
         return res.status(201).json({
@@ -44,3 +45,38 @@ router.post('/', (req, res) => {
 });
 
 
+router.post('/', (req, res) => {
+
+  const payload = inspector.sanitize(TransactionSchema.getTransactionsSanitize(), req.body);
+
+  return inspector.validate(
+    TransactionSchema.getTransactionsValidate(),
+    payload.data,
+    (error, result) => {
+      if (!result.valid) {
+        return res.status(404).json({
+          code: 'BR',
+          message: 'Bad Request: ' + result.format(),
+        });
+      } else if (error) {
+        return res.status(500).json({
+          code: 'UE',
+          message: 'Server Error: ' + error.message,
+        });
+      }
+
+      return Transaction.get(payload.data, (err, transaction) => {
+        if (err) {
+          return res.status(500).json(err);
+        }
+        return res.status(201).json({
+          code: 'SC',
+          message: 'Success: Transaction found',
+          data: transaction,
+        });
+      });
+    }
+  );
+});
+
+module.exports = router;

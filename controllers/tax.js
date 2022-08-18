@@ -4,7 +4,7 @@ const inspector = require('schema-inspector');
 const Tax = require('../models/tax');
 const TaxSchema = require('../schemas/tax');
 
-router.post('/', (req, res) => {
+router.post('/create', (req, res) => {
   const body = req.body;
 
   // Sanitize input
@@ -29,10 +29,7 @@ router.post('/', (req, res) => {
 
       return Tax.create({ data: payload.data }, (err, tax) => {
         if (err) {
-          return res.status(500).json({
-            code: 'UE',
-            message: err,
-          });
+          return res.status(500).json(err);
         }
         return res.status(201).json({
           code: 'SC',
@@ -44,10 +41,9 @@ router.post('/', (req, res) => {
   );
 });
 
-router.get('/', (req, res) => {
-  const { filters = [] } = req.query;
+router.post('/', (req, res) => {
 
-  const payload = inspector.sanitize(TaxSchema.getTaxesSanitize(), filters);
+  const payload = inspector.sanitize(TaxSchema.getTaxesSanitize(), req.body);
 
   return inspector.validate(
     TaxSchema.getTaxesValidate(),
@@ -65,12 +61,9 @@ router.get('/', (req, res) => {
         });
       }
 
-      return Tax.getTaxes({ filters: payload.data }, (err, taxes) => {
+      return Tax.get(payload.data, (err, taxes) => {
         if (err) {
-          return res.status(500).json({
-            code: 'UE',
-            message: err,
-          });
+          return res.status(500).json(err);
         }
         return res.status(200).json({
           code: 'SC',
@@ -81,3 +74,5 @@ router.get('/', (req, res) => {
     );
   });
 })
+
+module.exports = router;

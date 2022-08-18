@@ -20,6 +20,7 @@ app.get('/ping', (req, res) => {
 });
 
 app.use('/v1/tax', require('./controllers/tax'));
+app.use('/v1/transaction', require('./controllers/transaction'));
 
 //Start server
 const PORT = process.env.PORT || 9010;
