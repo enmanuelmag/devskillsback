@@ -54,7 +54,7 @@ class Transaction {
     }
 
     const documentRef = doc(db, taxCollectionName, data.barcode);
-    
+
     return async.waterfall([
       (cb) => {
         return getDoc(documentRef)
@@ -75,11 +75,17 @@ class Transaction {
             code: 'tax_already_paid',
           });
         }
-        console.log('Ref', documentRef);
+        if (data.amount !== tax.amount) {
+          return cb({
+            message: 'Amount does not match',
+            code: 'amount_does_not_match',
+          });
+        }
+
         return updateDoc(documentRef, { status: 'paid' })
           .then(() => cb())
           .catch((err) => {
-            console.log(`Error updating tax: ${err}`);
+            console.error(`Error updating tax: ${err}`);
             return cb(err);
           });
       },
@@ -92,7 +98,7 @@ class Transaction {
             return cb(null, data)
           })
           .catch((err) => {
-            console.log(`Error creating transaction: ${err}`);
+            console.error(`Error creating transaction: ${err}`);
             return cb(err);
           });
       }
@@ -104,22 +110,17 @@ class Transaction {
 
     const documentRef = collection(db, collectionName);
 
-    const fvalues = [];
-
     const filtersFirebase = filters.map((filter) => {
       if (filter.field === 'paymentDate') {
         filter.value = moment(filter.value).toDate().getTime();
-        fvalues.push(filter.value);
       }
       return where(filter.field, filter.operator, filter.value);
     });
 
     const q = query(documentRef, ...filtersFirebase);
-    console.log('fvalues', fvalues);
 
     return getDocs(q)
       .then((snapshot) => {
-        console.log('Len', snapshot.docs.length);
         const docs = snapshot.docs.map((doc) => {
           const data = doc.data();
           return {
@@ -131,7 +132,7 @@ class Transaction {
         const grouped = _.groupBy(docs, 'paymentDate');
         return callback(null, grouped);
       }).catch((err) => {
-        console.log(`Error getting transactions: ${err}`);
+        console.error(`Error getting transactions: ${err}`);
         return callback({
           message: 'Error getting transactions',
           code: 'error_getting_transactions',

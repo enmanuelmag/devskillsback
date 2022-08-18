@@ -56,7 +56,7 @@ class Tax {
             return cb();
           })
           .catch((err) => {
-            console.log(`Error checking if barcode exists: ${err}`);
+            console.error(`Error checking if barcode exists: ${err}`);
             return cb({
               message: 'Error checking if barcode exists',
               code: 'unknown_error',
@@ -71,7 +71,7 @@ class Tax {
             return cb(null, data)
           })
           .catch((err) => {
-            console.log(`Error creating tax: ${err}`);
+            console.error(`Error creating tax: ${err}`);
             return cb({
               message: 'Error creating tax',
               code: 'error_creating_tax',
@@ -113,7 +113,7 @@ class Tax {
         return callback(null, docs);
       })
       .catch((err) => {
-        console.log(`Error getting taxes: ${err}`);
+        console.error(`Error getting taxes: ${err}`);
         return callback({
           message: 'Error getting taxes',
           code: 'error_getting_taxes',

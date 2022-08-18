@@ -21,13 +21,12 @@ router.post('/pay', (req, res) => {
           message: 'Bad Request: ' + result.format(),
         });
       } else if (error) {
-        console.log(error);
+        console.error(error);
         return res.status(500).json({
           code: 'UE',
           message: 'Server Error: ' + error.message,
         });
       }
-      console.log(payload.data);
       return Transaction.pay({ data: payload.data }, (err, transaction) => {
         if (err) {
           return res.status(500).json({

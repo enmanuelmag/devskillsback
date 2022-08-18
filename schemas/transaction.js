@@ -7,6 +7,7 @@ module.exports.payTransactionSanitize = function () {
       },
       cardNumber: {
         type: 'string',
+        optional: true,
       },
       amount: {
         type: 'number',
@@ -32,6 +33,7 @@ module.exports.payTransactionValidate = function () {
       cardNumber: {
         type: 'string',
         minLength: 1,
+        optional: true,
       },
       amount: {
         type: 'number',

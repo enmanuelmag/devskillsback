@@ -16,7 +16,7 @@ router.post('/create', (req, res) => {
     payload.data,
     (error, result) => {
       if (!result.valid) {
-        return res.status(404).json({
+        return res.status(400).json({
           code: 'BR',
           message: 'Bad Request: ' + result.format(),
         });
@@ -50,7 +50,7 @@ router.post('/', (req, res) => {
     payload.data,
     (error, result) => {
       if (!result.valid) {
-        return res.status(404).json({
+        return res.status(400).json({
           code: 'BR',
           message: 'Bad Request: ' + result.format(),
         });
