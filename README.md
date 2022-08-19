@@ -15,7 +15,7 @@ npm start
 3. Test backend, you can use postman or curl to test the API. In the root of the project you can find a JSON file with a Postman collection to be imported in Postman.
 
 ```json
-http://localhost:9010/v1/tax/create
+http://localhost:9050/v1/tax/create
 {
     "service": "luz",
     "description": "luz pública",
@@ -25,7 +25,7 @@ http://localhost:9010/v1/tax/create
     "dueDate": "2020-08-17"
 }
 
-http://localhost:9010/v1/tax
+http://localhost:9050/v1/tax
 {
     "filters": [
         {
@@ -37,7 +37,7 @@ http://localhost:9010/v1/tax
 }
 
 
-http://localhost:9010/v1/transaction/pay
+http://localhost:9050/v1/transaction/pay
 {
     "method": "cash",
     "amount": 50,
@@ -45,7 +45,7 @@ http://localhost:9010/v1/transaction/pay
     "paymentDate": "2022-08-15"
 }
 
-http://localhost:9010/v1/transaction
+http://localhost:9050/v1/transaction
 {
     "filters": [
         {

@@ -21,12 +21,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9010/v1/tax/create",
+					"raw": "http://localhost:9050/v1/tax/create",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "9010",
+					"port": "9050",
 					"path": [
 						"v1",
 						"tax",
@@ -51,12 +51,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9010/v1/transaction/pay",
+					"raw": "http://localhost:9050/v1/transaction/pay",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "9010",
+					"port": "9050",
 					"path": [
 						"v1",
 						"transaction",
@@ -81,12 +81,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9010/v1/transaction",
+					"raw": "http://localhost:9050/v1/transaction",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "9010",
+					"port": "9050",
 					"path": [
 						"v1",
 						"transaction"
@@ -110,12 +110,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9010/v1/tax/",
+					"raw": "http://localhost:9050/v1/tax/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "9010",
+					"port": "9050",
 					"path": [
 						"v1",
 						"tax",
